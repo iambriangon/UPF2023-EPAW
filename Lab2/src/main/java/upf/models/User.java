@@ -1,5 +1,7 @@
 package upf.models;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +14,13 @@ public class User implements java.io.Serializable {
     private String pwd1 = "";
     private String pwd2 = "";
 
-    private boolean[] error  = {false,false,false,false};
+    private Map<String, Boolean> error  = new HashMap<>()
+    {{
+        put("user", true);
+        put("mail", false);
+        put("pwd1", false);
+        put("pwd2", false);
+    }};
 
     public User() {
 
@@ -23,9 +31,7 @@ public class User implements java.io.Serializable {
     }
 
     public void setUser(String user) {
-        /* We can simulate that a user with the same name exists in our DB and mark error[0] as true  */
-        //error[0] = true;
-
+        error.replace("user", true);
         this.user = user;
         System.out.println(user);
     }
@@ -42,7 +48,7 @@ public class User implements java.io.Serializable {
             this.mail = mail;
             System.out.println(mail);
         } else {
-            error[1]=true;
+            error.replace("mail", true);
             System.out.println(mail);
         }
     }
@@ -52,9 +58,16 @@ public class User implements java.io.Serializable {
     }
 
     public void setPwd1(String pwd1) {
-        /* TODO check restriction with pattern */
-        this.pwd1 = pwd1;
-        System.out.println(pwd1);
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(pwd1);
+        if (matcher.matches()){
+            this.pwd1 = pwd1;
+            System.out.println(pwd1);
+        } else {
+            error.replace("pwd1", true);
+            System.out.println(pwd1);
+        }
     }
 
     public String getPwd2() {
@@ -62,13 +75,19 @@ public class User implements java.io.Serializable {
     }
 
     public void setPwd2(String pwd2) {
-        /* TODO check restriction with pattern and check if pwd1=pwd2*/
-        this.pwd2 = pwd2;
-        System.out.println(pwd2);
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(pwd2);
+        if (matcher.matches() && this.pwd1.equals(pwd2)){
+            this.pwd2 = pwd2;
+            System.out.println(pwd2);
+        } else {
+            error.replace("pwd2", true);
+            System.out.println(pwd2);
+        }
     }
 
-    public boolean[] getError() {
+    public Map<String, Boolean> getError() {
         return error;
     }
-
 }

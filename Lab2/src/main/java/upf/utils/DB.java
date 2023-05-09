@@ -10,14 +10,13 @@ public class DB {
 
         // WITHOUT POOL
         String user = "mysql";
-        String password="prac";
+        String password ="prac";
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection=DriverManager.getConnection("jdbc:mysql://localhost/lab2?&user="+user+"&password="+password);
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/lab2?&user="+user+"&password="+password);
 
     }
 
     //execute queries
-
     public PreparedStatement prepareStatement(String query) throws SQLException{
         // Note that this is done using https://www.arquitecturajava.com/jdbc-prepared-statement-y-su-manejo/
         return connection.prepareStatement(query);

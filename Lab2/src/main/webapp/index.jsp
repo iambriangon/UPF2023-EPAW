@@ -18,8 +18,8 @@
 <body>
 
 <ul class="server-errors-list">
-    <c:if test = "${model.error[0]}">
-        <li> Entered user name has been already registered </li>
+    <c:if test = "${model.error.user}">
+        <li> Entered username has been already registered </li>
     </c:if>
 </ul>
 
