@@ -43,8 +43,7 @@ public class RegisterController extends HttpServlet {
         try {
             BeanUtils.populate(model, request.getParameterMap());
             if (manager.isComplete(model)) {
-                // Pass the birthday field to addUser()
-                manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getBirthday(), model.getGender(),model.getPhoneNumber(), model.isTerms(),model.isNewsletter());
+                manager.addUser(model.getUsername(), model.getMail(), model.getPwd1(), model.getBirthday(), model.getGender(),model.getPhoneNumber(), model.isTerms(),model.isNewsletter());
                 manager.finalize();
                 view = "registered.jsp";
             }

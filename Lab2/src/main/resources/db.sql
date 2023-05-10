@@ -1,13 +1,15 @@
-CREATE DATABASE lab2;
+-- CREATE DATABASE lab2;
 USE lab2;
 
+DROP TABLE `users`;
 CREATE TABLE `users` (
-    `usr` varchar(255) NOT NULL,
+    `usr` varchar(255) NOT NULL PRIMARY KEY,
     `mail` varchar(255) NOT NULL,
     `pwd` varchar(255) NOT NULL,
     `birthday` date NOT NULL,
-    PRIMARY KEY (`usr`),
-    UNIQUE KEY `mail` (`mail`)
+    UNIQUE KEY `mail` (`mail`),
+    `gender` ENUM('male', 'female') NOT NULL,
+    `phoneNumber` VARCHAR(255) UNIQUE,
+    `terms` bool NOT NULL,
+    `newsletter` bool NOT NULL
 );
-ALTER TABLE `users` ADD `gender` ENUM('male', 'female') NOT NULL;
-ALTER TABLE `users` ADD `phoneNumber` VARCHAR(255) UNIQUE;

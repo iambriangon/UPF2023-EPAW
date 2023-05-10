@@ -1,5 +1,4 @@
 package upf.models;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +9,11 @@ public class User implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String user = "";
+    private String username = "";
     private String mail = "";
     private String pwd1 = "";
     private String pwd2 = "";
-    private LocalDate birthday;
+    private String birthday = "";
     private String gender = "";
     private String phoneNumber = "";
     private boolean terms;
@@ -22,26 +21,34 @@ public class User implements java.io.Serializable {
     
     private Map<String, Boolean> error  = new HashMap<>()
     {{
-        put("user", false);
+        put("username", false);
         put("mail", false);
         put("pwd1", false);
         put("pwd2", false);
         put("birthday",false);
-       // put("gender",false);
+        put("gender",false);
         put("phoneNumber",false);
+        put("terms", false);
     }};
 
     public User() {
 
     }
 
-    public String getUser() {
-        return this.user;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-        System.out.println(user);
+    public void setUsername(String username) {
+        System.out.println(username);
+        String regex = "^[a-z0-9_]{1,20}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(username);
+        if (matcher.matches()){
+            this.username = username;
+        } else {
+            isAnyError("username");
+        }
     }
 
     public String getMail() {
@@ -54,10 +61,8 @@ public class User implements java.io.Serializable {
         Matcher matcher = pattern.matcher(mail);
         if (matcher.matches()) {
             this.mail = mail;
-            System.out.println(mail);
         } else {
             isAnyError("mail");
-            System.out.println(mail);
         }
     }
 
@@ -71,10 +76,8 @@ public class User implements java.io.Serializable {
         Matcher matcher = pattern.matcher(pwd1);
         if (matcher.matches()){
             this.pwd1 = pwd1;
-            System.out.println(pwd1);
         } else {
             isAnyError("pwd1");
-            System.out.println(pwd1);
         }
     }
 
@@ -88,27 +91,35 @@ public class User implements java.io.Serializable {
         Matcher matcher = pattern.matcher(pwd2);
         if (matcher.matches() && this.pwd1.equals(pwd2)){
             this.pwd2 = pwd2;
-            System.out.println(pwd2);
         } else {
             isAnyError("pwd2");
-            System.out.println(pwd2);
         }
     }
-    public LocalDate getBirthday() {
+
+    public String getBirthday() {
         return this.birthday;
     }
     
     public void setBirthday(String birthday) {
+        System.out.println(birthday);
         try {
-            this.birthday = LocalDate.parse(birthday);
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+            //this.birthday = LocalDate.parse(birthday, formatter);
+            String regex = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]?[0-9]|3[01])";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(birthday);
+            if (matcher.matches()){
+                this.birthday = birthday;
+            }
         } catch (DateTimeParseException e) {
             isAnyError("birthday");
         }
     }
+
     public String getGender() {
-    	
     	return this.gender;
     }
+
     public void setGender(String gender) {
         if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
             this.gender = gender;
@@ -135,7 +146,11 @@ public class User implements java.io.Serializable {
     }
 
     public void setTerms(boolean terms) {
-        this.terms = terms;
+        if (terms){
+            this.terms = terms;
+        } else {
+            isAnyError("terms");
+        }   
     }
 
 
