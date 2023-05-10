@@ -37,6 +37,21 @@
     <input type="password" id="pwd1" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"><br>
     <label for="pwd2"> Confirm Password: </label><br>
     <input type="password" id="pwd2" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"><br><br>
+    <label for="birthday"> Birthday:</label><br>
+	<input type="date" id="birthday" name="birthday" required><br>
+	<label for="gender"> Gender: </label><br>
+	<select id="gender" name="gender" required>
+    <option value="">Choose</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+	</select><br><br>
+	<label for="phoneNumber"> Phone Number: </label><br>
+	<input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="${model.phoneNumber}"><br>
+	<label for="terms">I agree to the Terms & Conditions:</label><br>
+	<input type="checkbox" id="terms" name="terms" required><br><br>
+	<label for="newsletter">Subscribe to email newsletter:</label><br>
+	<input type="checkbox" id="newsletter" name="newsletter"><br><br>
+	
     <button> Submit </button>
 </form>
 

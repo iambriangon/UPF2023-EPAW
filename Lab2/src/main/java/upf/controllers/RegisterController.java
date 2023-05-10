@@ -41,9 +41,10 @@ public class RegisterController extends HttpServlet {
         String view = "index.jsp";
 
         try {
-            BeanUtils.populate(model,request.getParameterMap());
+            BeanUtils.populate(model, request.getParameterMap());
             if (manager.isComplete(model)) {
-                manager.addUser(model.getUser(), model.getMail(), model.getPwd1());
+                // Pass the birthday field to addUser()
+                manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getBirthday(), model.getGender(),model.getPhoneNumber(), model.isTerms(),model.isNewsletter());
                 manager.finalize();
                 view = "registered.jsp";
             }
@@ -57,6 +58,7 @@ public class RegisterController extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
+
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

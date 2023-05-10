@@ -3,6 +3,7 @@ package upf.managers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import upf.models.User;
 import upf.utils.DB;
@@ -28,14 +29,19 @@ public class ManageUsers {
     }
 
     // Add new user
-    public void addUser(String name, String mail, String pwd) {
-        String query = "INSERT INTO users (usr,mail,pwd) VALUES (?,?,?)";
+    public void addUser(String name, String mail, String pwd, LocalDate birthday, String gender, String phoneNumber, boolean terms, boolean newsletter) {
+        String query = "INSERT INTO users (usr,mail,pwd,birthday,gender,phoneNumber,terms,newsletter) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
         try {
             statement = db.prepareStatement(query);
             statement.setString(1, name);
             statement.setString(2, mail);
             statement.setString(3, pwd);
+            statement.setDate(4, java.sql.Date.valueOf(birthday));
+            statement.setString(5,gender);
+            statement.setString(6, phoneNumber);
+            statement.setBoolean(7, terms);
+            statement.setBoolean(8, newsletter);
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
@@ -48,9 +54,13 @@ public class ManageUsers {
         return (hasValue(user.getUser()) &&
                 hasValue(user.getMail()) &&
                 hasValue(user.getPwd1()) &&
-                hasValue(user.getPwd2())) &&
-                isNotRegistered(user);
+                hasValue(user.getPwd2()) &&
+                (user.getBirthday()!= null) &&
+                user.isTerms() &&
+                isNotRegistered(user) &&
+                (user.getPhoneNumber() == null || isPhoneNumberUnique(user.getPhoneNumber())));
     }
+
 
     private boolean isNotRegistered(User user) throws SQLException {
         boolean user_registered = getUserFromDB(user.getUser());
@@ -100,4 +110,23 @@ public class ManageUsers {
         }
         return false;
     }
+    
+    public boolean isPhoneNumberUnique(String phoneNumber) {
+        String query = "SELECT * FROM users WHERE phoneNumber=?";
+        PreparedStatement statement = null;
+        try {
+            statement = db.prepareStatement(query);
+            statement.setString(1, phoneNumber);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

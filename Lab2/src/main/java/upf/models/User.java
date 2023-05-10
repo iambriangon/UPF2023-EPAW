@@ -1,5 +1,6 @@
 package upf.models;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -13,13 +14,21 @@ public class User implements java.io.Serializable {
     private String mail = "";
     private String pwd1 = "";
     private String pwd2 = "";
-
+    private LocalDate birthday;
+    private String gender = "";
+    private String phoneNumber = "";
+    private boolean terms;
+    private boolean newsletter;
+    
     private Map<String, Boolean> error  = new HashMap<>()
     {{
         put("user", false);
         put("mail", false);
         put("pwd1", false);
         put("pwd2", false);
+        put("birthday",false);
+       // put("gender",false);
+        put("phoneNumber",false);
     }};
 
     public User() {
@@ -85,6 +94,59 @@ public class User implements java.io.Serializable {
             System.out.println(pwd2);
         }
     }
+    public LocalDate getBirthday() {
+        return this.birthday;
+    }
+    
+    public void setBirthday(String birthday) {
+        try {
+            this.birthday = LocalDate.parse(birthday);
+        } catch (DateTimeParseException e) {
+            isAnyError("birthday");
+        }
+    }
+    public String getGender() {
+    	
+    	return this.gender;
+    }
+    public void setGender(String gender) {
+        if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
+            this.gender = gender;
+        } else {
+            isAnyError("gender");
+        }
+    }
+    
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber.isEmpty() || phoneNumber.matches("\\+?\\d{1,3}?[-.\\s]?\\(?\\d{1,4}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}")) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            isAnyError("phoneNumber");
+        }
+    }
+
+
+    public boolean isTerms() {
+        return terms;
+    }
+
+    public void setTerms(boolean terms) {
+        this.terms = terms;
+    }
+
+
+    public boolean isNewsletter() {
+        return newsletter;
+    }
+
+    public void setNewsletter(boolean newsletter) {
+        this.newsletter = newsletter;
+    }
+
 
     public Map<String, Boolean> getError() {
         return error;
