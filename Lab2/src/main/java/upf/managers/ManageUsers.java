@@ -43,20 +43,27 @@ public class ManageUsers {
         }
     }
 
-
     /*Check if all the fields are filled correctly */
-    public boolean isComplete(User user) {
+    public boolean isComplete(User user) throws SQLException {
         return (hasValue(user.getUser()) &&
                 hasValue(user.getMail()) &&
                 hasValue(user.getPwd1()) &&
-                hasValue(user.getPwd2()));
+                hasValue(user.getPwd2())) &&
+                isNotRegistered(user);
     }
 
-    private boolean isAlreadyRegistered(User user) throws SQLException {
-        ResultSet u = getUserFromDB(user.getUser());
-        ResultSet e = getEmailFromDB(user.getMail());
+    private boolean isNotRegistered(User user) throws SQLException {
+        boolean user_registered = getUserFromDB(user.getUser());
+        boolean mail_registered = getEmailFromDB(user.getMail());
 
-        return true;
+        if (user_registered){
+            user.isAnyError("user");
+        }
+        if (mail_registered){
+            user.isAnyError("mail");
+        }
+
+        return !user_registered && !mail_registered;
     }
 
 
@@ -64,25 +71,33 @@ public class ManageUsers {
         return ((val != null) && (!val.equals("")));
     }
 
-    private ResultSet getUserFromDB(String username) {
+    private boolean getUserFromDB(String username) {
         String query = "SELECT usr FROM users WHERE usr = ?";
         try (PreparedStatement statement = db.prepareStatement(query)) {
             statement.setString(1, username);
-            return statement.executeQuery();
+            ResultSet r = statement.executeQuery();
+            boolean registered = r.next();
+            r.close();
+            return  registered;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
-    private ResultSet getEmailFromDB(String email) {
+    private boolean getEmailFromDB(String email) {
         String query = "SELECT mail FROM users WHERE mail = ?";
         try (PreparedStatement statement = db.prepareStatement(query)) {
             statement.setString(1, email);
-            return statement.executeQuery();
+            ResultSet r = statement.executeQuery();
+            boolean registered = r.next();
+            r.close();
+            return registered;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 }

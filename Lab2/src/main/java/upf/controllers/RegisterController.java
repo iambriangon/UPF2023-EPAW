@@ -2,6 +2,7 @@ package upf.controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,7 +48,7 @@ public class RegisterController extends HttpServlet {
                 view = "registered.jsp";
             }
 
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException | SQLException e) {
             e.printStackTrace();
         }
 

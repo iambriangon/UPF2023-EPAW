@@ -16,7 +16,7 @@ public class User implements java.io.Serializable {
 
     private Map<String, Boolean> error  = new HashMap<>()
     {{
-        put("user", true);
+        put("user", false);
         put("mail", false);
         put("pwd1", false);
         put("pwd2", false);
@@ -31,7 +31,6 @@ public class User implements java.io.Serializable {
     }
 
     public void setUser(String user) {
-        error.replace("user", true);
         this.user = user;
         System.out.println(user);
     }
@@ -48,7 +47,7 @@ public class User implements java.io.Serializable {
             this.mail = mail;
             System.out.println(mail);
         } else {
-            error.replace("mail", true);
+            isAnyError("mail");
             System.out.println(mail);
         }
     }
@@ -65,7 +64,7 @@ public class User implements java.io.Serializable {
             this.pwd1 = pwd1;
             System.out.println(pwd1);
         } else {
-            error.replace("pwd1", true);
+            isAnyError("pwd1");
             System.out.println(pwd1);
         }
     }
@@ -82,12 +81,16 @@ public class User implements java.io.Serializable {
             this.pwd2 = pwd2;
             System.out.println(pwd2);
         } else {
-            error.replace("pwd2", true);
+            isAnyError("pwd2");
             System.out.println(pwd2);
         }
     }
 
     public Map<String, Boolean> getError() {
         return error;
+    }
+
+    public void isAnyError(String field){
+        error.replace(field, true);
     }
 }

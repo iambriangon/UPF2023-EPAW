@@ -21,6 +21,10 @@
     <c:if test = "${model.error.user}">
         <li> Entered username has been already registered </li>
     </c:if>
+
+    <c:if test = "${model.error.mail}">
+        <li> Entered email has been already registered </li>
+    </c:if>
 </ul>
 
 <form action="RegisterController">
