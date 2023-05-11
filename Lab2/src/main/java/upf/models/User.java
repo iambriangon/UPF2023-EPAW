@@ -103,9 +103,9 @@ public class User implements java.io.Serializable {
     public void setBirthday(String birthday) {
         System.out.println(birthday);
         try {
-            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
             //this.birthday = LocalDate.parse(birthday, formatter);
-            String regex = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]?[0-9]|3[01])";
+            String regex = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(birthday);
             if (matcher.matches()){
@@ -133,7 +133,7 @@ public class User implements java.io.Serializable {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber.isEmpty() || phoneNumber.matches("\\+?\\d{1,3}?[-.\\s]?\\(?\\d{1,4}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}")) {
+        if (phoneNumber.isEmpty() || phoneNumber.matches("^(\\+34)?[67]\\d{8}$")) { // only spanish numbers
             this.phoneNumber = phoneNumber;
         } else {
             isAnyError("phoneNumber");
@@ -147,7 +147,7 @@ public class User implements java.io.Serializable {
 
     public void setTerms(boolean terms) {
         if (terms){
-            this.terms = terms;
+            this.terms = true;
         } else {
             isAnyError("terms");
         }   

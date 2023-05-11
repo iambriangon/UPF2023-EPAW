@@ -1,7 +1,7 @@
 -- CREATE DATABASE lab2;
 USE lab2;
 
-DROP TABLE `users`;
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
     `usr` varchar(255) NOT NULL PRIMARY KEY,
     `mail` varchar(255) NOT NULL,

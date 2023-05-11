@@ -57,14 +57,14 @@ public class ManageUsers {
                 hasValue(user.getPwd2()) &&
                 (user.getBirthday()!= null) &&
                 user.isTerms() &&
-                isNotRegistered(user) &&
-                (user.getPhoneNumber() == null || isPhoneNumberUnique(user.getPhoneNumber())));
+                isNotRegistered(user));
     }
 
 
     private boolean isNotRegistered(User user) throws SQLException {
         boolean user_registered = getUserFromDB(user.getUsername());
         boolean mail_registered = getEmailFromDB(user.getMail());
+        boolean phone_registered = isPhoneNumberUnique(user.getPhoneNumber());
 
         if (user_registered){
             user.isAnyError("username");
@@ -72,8 +72,11 @@ public class ManageUsers {
         if (mail_registered){
             user.isAnyError("mail");
         }
+        if (phone_registered){
+            user.isAnyError("phoneNumber");
+        }
 
-        return !user_registered && !mail_registered;
+        return !user_registered && !mail_registered && !phone_registered;
     }
 
 
@@ -83,6 +86,7 @@ public class ManageUsers {
 
     private boolean getUserFromDB(String username) {
         String query = "SELECT usr FROM users WHERE usr = ?";
+
         try (PreparedStatement statement = db.prepareStatement(query)) {
             statement.setString(1, username);
             ResultSet r = statement.executeQuery();
@@ -93,7 +97,7 @@ public class ManageUsers {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     private boolean getEmailFromDB(String email) {
@@ -108,21 +112,21 @@ public class ManageUsers {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
     
     public boolean isPhoneNumberUnique(String phoneNumber) {
         String query = "SELECT * FROM users WHERE phoneNumber=?";
-        PreparedStatement statement = null;
-        try {
-            statement = db.prepareStatement(query);
+        if (phoneNumber.isEmpty()) // if user did not introduce their phone number do not check in DB
+            return false;
+
+        try (PreparedStatement statement = db.prepareStatement(query)) {
             statement.setString(1, phoneNumber);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return false;
-            }
-            resultSet.close();
-            statement.close();
+            ResultSet r = statement.executeQuery();
+            boolean registered = r.next();
+            r.close();
+            return registered;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
