@@ -86,11 +86,11 @@
 	<input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="${model.phoneNumber}" onkeyup="checkInput(this)" pattern="^[67]\d{8}$">
 	<div class="check">
         <label for="terms">I agree to the Terms & Conditions:</label>
-        <input type="checkbox" id="terms" name="terms" required>
+        <input type="checkbox" id="terms" onclick="setCheckbox(this)" name="terms" required>
     </div>
     <div class="check">
         <label for="newsletter">Subscribe to email newsletter:</label>
-        <input type="checkbox" id="newsletter" name="newsletter" value="${model.newsletter}">
+        <input type="checkbox" id="newsletter" name="newsletter" onclick="setCheckbox(this)" value="${model.newsletter}">
     </div>
     <button> Submit </button>
 </form>
@@ -101,6 +101,10 @@
     const pwd2 = document.getElementById('pwd2');
     const form = document.getElementById('myform');
     const birthday = document.getElementById("birthday");
+
+    function setCheckbox(input) {
+        input.value = input.checked;
+    }
 
     function ageRegistrationCheck(input) {
             today = new Date();
