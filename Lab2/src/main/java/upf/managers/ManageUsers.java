@@ -3,7 +3,6 @@ package upf.managers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import upf.models.User;
 import upf.utils.DB;
@@ -33,6 +32,7 @@ public class ManageUsers {
         String query = "INSERT INTO users (usr,mail,pwd,birthday,gender,phoneNumber,terms,newsletter) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
         try {
+            phoneNumber = phoneNumber.isEmpty()? null : phoneNumber;
             statement = db.prepareStatement(query);
             statement.setString(1, name);
             statement.setString(2, mail);

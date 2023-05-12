@@ -133,7 +133,7 @@ public class User implements java.io.Serializable {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber.isEmpty() || phoneNumber.matches("^(\\+34)?[67]\\d{8}$")) { // only spanish numbers
+        if (phoneNumber.isEmpty() || phoneNumber.matches("^[67]\\d{8}$")) { // only spanish numbers
             this.phoneNumber = phoneNumber;
         } else {
             isAnyError("phoneNumber");
