@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.lab3.managers.ManageUsers;
 import org.apache.commons.beanutils.BeanUtils;
 
-import models.Login;
+import com.example.lab3.models.Login;
 
 /**
  * Servlet implementation class LoginController
@@ -37,13 +38,14 @@ public class LoginController extends HttpServlet {
 		System.out.print("LoginController: ");
 		
 		Login login = new Login();
+		ManageUsers manager = new ManageUsers();
 		
 	    try {
 			
 	    	BeanUtils.populate(login, request.getParameterMap());
 			
-	    	if (login.isComplete()) {
-		    	
+	    	if (manager.isComplete(login)) {
+
 	    		System.out.println("login OK, forwarding to ViewLoginDone ");
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("user",login.getUser());

@@ -2,6 +2,7 @@ package com.example.lab3.controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.lab3.managers.ManageUsers;
 import org.apache.commons.beanutils.BeanUtils;
 import com.example.lab3.models.User;
 
@@ -33,13 +35,12 @@ public class RegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	   System.out.print("RegisterController: ");
-		
+		User user = new User();
+		ManageUsers manager = new ManageUsers();
+
 	   try {
-	
-		   User user = new User();
 		   BeanUtils.populate(user, request.getParameterMap());
-		
-		   if (user.isComplete()) {
+		   if (manager.isComplete(user)) {
 			   
 			   System.out.println(" user ok, forwarding to ViewLoginForm");
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
@@ -54,10 +55,9 @@ public class RegisterController extends HttpServlet {
 			   dispatcher.forward(request, response);
 		   }
 	   
-	   } catch (IllegalAccessException | InvocationTargetException e) {
+	   } catch (IllegalAccessException | InvocationTargetException | SQLException e) {
 			e.printStackTrace();
 	   }
-		
 	}
 
 	/**

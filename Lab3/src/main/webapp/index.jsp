@@ -51,6 +51,11 @@ $(document).ready(function(){
     		x.className = x.className.replace(" w3-show", "");
   			}
 		}
+
+		function setCheckbox(input) {
+			input.value = input.checked;
+		}
+
 	</script>
 
   </body>
