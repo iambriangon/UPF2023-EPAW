@@ -1,4 +1,4 @@
-package com.example.lab3.controllers;
+package upf.controllers;
 
 import java.io.IOException;
 

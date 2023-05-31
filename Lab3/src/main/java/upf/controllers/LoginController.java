@@ -1,4 +1,4 @@
-package com.example.lab3.controllers;
+package upf.controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.example.lab3.managers.ManageUsers;
 import org.apache.commons.beanutils.BeanUtils;
 
-import com.example.lab3.models.Login;
+import upf.managers.ManageUsers;
+import upf.models.Login;
 
 /**
  * Servlet implementation class LoginController
@@ -45,10 +45,10 @@ public class LoginController extends HttpServlet {
 	    	BeanUtils.populate(login, request.getParameterMap());
 			
 	    	if (manager.isComplete(login)) {
-
+		    	
 	    		System.out.println("login OK, forwarding to ViewLoginDone ");
 		    	HttpSession session = request.getSession();
-		    	session.setAttribute("user",login.getUser());
+		    	session.setAttribute("user", login.getUser());
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);
 			    
@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
 			else {
 		     
 				System.out.println("user is not logged, forwarding to ViewLoginForm ");
-			    request.setAttribute("login",login);
+			    request.setAttribute("login", login);
 			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			    dispatcher.forward(request, response);
 		    	

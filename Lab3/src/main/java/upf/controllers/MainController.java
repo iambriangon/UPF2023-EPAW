@@ -1,4 +1,4 @@
-package com.example.lab3.controllers;
+package upf.controllers;
 
 import java.io.IOException;
 
@@ -8,18 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ContentController
+ * Servlet implementation class MainController
  */
-@WebServlet("/ContentController")
-public class ContentController extends HttpServlet {
+@WebServlet("/MainController")
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContentController() {
+    public MainController() {
         super();
     }
 
@@ -28,12 +29,21 @@ public class ContentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String content = (String)request.getParameter("content");
-		System.out.println("ContentController: forwarding to " + content);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(content);
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession(false);
 		
-	}
+		if (session==null || session.getAttribute("user")==null) {
+			System.out.println("MainController: NO active session has been found,");
+			request.setAttribute("menu","ViewMenuNotLogged.jsp");
+			request.setAttribute("content","ViewRegisterForm.jsp");
+		}
+		else {
+			System.out.println("Main Controller: active session has been found,");
+			request.setAttribute("menu","ViewMenuLogged.jsp");
+			request.setAttribute("content","ViewLoginDone.jsp");
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,3 +53,4 @@ public class ContentController extends HttpServlet {
 	}
 
 }
+

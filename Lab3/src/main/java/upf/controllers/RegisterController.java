@@ -1,4 +1,4 @@
-package com.example.lab3.controllers;
+package upf.controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.lab3.managers.ManageUsers;
 import org.apache.commons.beanutils.BeanUtils;
-import com.example.lab3.models.User;
+
+import upf.managers.ManageUsers;
+import upf.models.User;
 
 /**
  * Servlet implementation class FormController
@@ -35,14 +36,21 @@ public class RegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	   System.out.print("RegisterController: ");
-		User user = new User();
-		ManageUsers manager = new ManageUsers();
-
+		
 	   try {
+	
+		   User user = new User();
+		   ManageUsers manager = new ManageUsers();
+
 		   BeanUtils.populate(user, request.getParameterMap());
+
+		   System.out.println("Printing User: " + user);
+		
 		   if (manager.isComplete(user)) {
 			   
 			   System.out.println(" user ok, forwarding to ViewLoginForm");
+			   manager.addUser(user.getUsername(), user.getMail(), user.getPwd1(), user.getBirthday(), user.getGender(), user.getPhoneNumber(), user.isTerms(), user.isNewsletter());
+			   manager.finalize();
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			   dispatcher.forward(request, response);
 		   
@@ -50,7 +58,7 @@ public class RegisterController extends HttpServlet {
 		   else {
 		
 			   System.out.println(" forwarding to ViewRegisterForm");
-			   request.setAttribute("user",user);
+			   request.setAttribute("user", user);
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewRegisterForm.jsp");
 			   dispatcher.forward(request, response);
 		   }
@@ -58,6 +66,7 @@ public class RegisterController extends HttpServlet {
 	   } catch (IllegalAccessException | InvocationTargetException | SQLException e) {
 			e.printStackTrace();
 	   }
+
 	}
 
 	/**

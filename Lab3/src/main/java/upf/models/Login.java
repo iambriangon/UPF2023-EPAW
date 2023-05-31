@@ -1,11 +1,18 @@
-package com.example.lab3.models;
+package upf.models;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login {
 
 	private String user = "";
 	private String password = "";
 
-	private int[] error = {0};
+	private Map<String, Boolean> error  = new HashMap<>()
+	{{
+		put("user", false);
+		put("password", false);
+	}};
 	
 	public String getUser(){
 		return user;
@@ -23,7 +30,7 @@ public class Login {
 		this.password = password;
 	}
 
-	public int[] getError() {
+	public Map<String, Boolean> getError() {
 		return error;
 	}
 	
@@ -31,8 +38,13 @@ public class Login {
 	    return(hasValue(getUser()));
 	}
 
+	public void isAnyError(String field){
+		error.replace(field, true);
+	}
+
 	private boolean hasValue(String val) {
 		return((val != null) && (!val.equals("")));
 	}
+
 	
 }

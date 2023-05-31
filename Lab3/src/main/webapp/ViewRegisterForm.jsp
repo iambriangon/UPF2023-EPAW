@@ -17,62 +17,89 @@
     </c:if>
 </ul>
 
-
-<h1 class="w3-text-black">Registration form</h1>
+<h1 class="w3-bottombar w3-text-black">
+    Registration Form
+</h1>
 <form action="RegisterController" method="POST">
-
-    <p>
-        <label class="w3-text-red" for="username"> User name:</label>
-        <input class="w3-input w3-border w3-light-grey" type="text" id="username" name="username" placeholder="Name" value="${user.username}"  required>
+	<p>      
+        <label class="w3-text-red"><b> Username </b></label>
+        <input class="w3-input w3-border w3-light-grey" placeholder="myusername" type="text" name="username" value="${user.username}" required>
     </p>
-
-    <p>
-        <label class="w3-text-red" for="mail"> Mail:</label>
-        <input class="w3-input w3-border w3-light-grey" type="email" id="mail" name="mail" placeholder="Mail" value="${user.mail}" required pattern="[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+">
+    <p>      
+        <label class="w3-text-red"><b> Mail address </b></label>
+        <input class="w3-input w3-border w3-light-grey" placeholder="example@domain.com" type="email" name="mail" value="${user.mail}" required pattern="[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+">
     </p>
-
     <p>
-        <label class="w3-text-red" for="pwd1"> Password: </label>
-        <input class="w3-input w3-border w3-light-grey" type="password" id="pwd1" name="pwd1" placeholder="Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
+        <label class="w3-text-red"><b> Password </b></label>
+        <input class="w3-input w3-border w3-light-grey" id="pwd1" type="password" name="pwd1" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
     </p>
-
     <p>
-        <label class="w3-text-red" for="pwd2"> Confirm Password: </label>
-        <input class="w3-input w3-border w3-light-grey" type="password" id="pwd2" name="pwd2" placeholder="Confirm Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
+        <label class="w3-text-red"><b> Repeat password </b></label>
+        <input class="w3-input w3-border w3-light-grey" type="password" name="pwd2" oninput="checkValidPassword(this)" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
     </p>
-
     <p>
-        <label class="w3-text-red" for="birthday"> Birthday:</label>
-        <input class="w3-input w3-border w3-light-grey" type="date" id="birthday" name="birthday" value="${user.birthday}" required>
+        <label class="w3-text-red"><b> Birthday </b></label>
+        <input class="w3-input w3-border w3-light-grey" type="date" name="birthday" oninput="checkValidAge(this)" required>
     </p>
-
     <p>
-        <label class="w3-text-red" for="gender"> Gender: </label>
-        <select class="w3-select w3-border w3-light-grey" id="gender" name="gender" value="${user.gender}" required>
-            <option value="">Choose</option>
+        <label class="w3-text-red"><b> Gender </b></label>
+        <select class="w3-select w3-border w3-light-grey" name="gender" required>
+            <option value="" disabled selected>Choose</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
         </select>
     </p>
-
     <p>
-        <label class="w3-text-red" for="phoneNumber"> Phone Number: </label>
-        <input class="w3-input w3-border w3-light-grey" type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="${user.phoneNumber}" pattern="^[67]\d{8}$">
+        <label class="w3-text-red"><b> Phone number </b></label>
+        <input class="w3-input w3-border w3-light-grey" placeholder="6/7XXXXXXXX" type="tel" name="phoneNumber" required pattern="^[67]\d{8}$">
+    </p>
+    <p>
+        <label class="w3-text-red">I agree to the Terms & Conditions:</label>
+        <input class="w3-check" type="checkbox" name="terms" onclick="setCheckbox(this)" required>
     </p>
 
     <p>
-        <label class="w3-text-red" for="terms">I agree to the Terms & Conditions:</label>
-        <input class="w3-check"  type="checkbox" id="terms" onclick="setCheckbox(this)" name="terms" required>
+        <label class="w3-text-red">Subscribe to email newsletter:</label>
+        <input class="w3-check" type="checkbox" name="newsletter" onclick="setCheckbox(this)">
     </p>
-
     <p>
-        <label class="w3-text-red" for="newsletter">Subscribe to email newsletter:</label>
-        <input class="w3-check"  type="checkbox" id="newsletter" name="newsletter" onclick="setCheckbox(this)" value="${user.newsletter}">
+        <input class="w3-btn w3-red" type="submit" name="sumbit" value="Submit">
     </p>
-
-    <p>
-        <input class="w3-btn w3-red" type="submit" name="sumbit" value="Register">
-    </p>
-
 </form>
 
+<script>
+
+    function setCheckbox(input) {
+        input.value = input.checked;
+    }
+
+    function checkValidPassword(pwd2) {
+        var pwd1 = document.getElementById('pwd1');
+        if (!isEqualPassword(pwd1.value, pwd2.value)) {
+            pwd2.setCustomValidity("Passwords must match!!");
+        } else {
+            pwd2.setCustomValidity("");
+        }
+    }
+
+    function isEqualPassword(pwd1, pwd2) {
+        return pwd1 === pwd2;
+    }
+
+    function checkValidAge(birthday) {
+        if (!ageRegistrationCheck(birthday)) {
+            birthday.setCustomValidity("To use this service you must be between 14 and 120 years old!!");
+        } else {
+            birthday.setCustomValidity("");
+        }
+    }
+
+    function ageRegistrationCheck(input) {
+        var today = new Date();
+        var min_age = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
+        var max_age = new Date(today.getFullYear() - 14, today.getMonth(), today.getDate());
+        var dateSelected = new Date(input.value);
+        return max_age >= dateSelected && dateSelected >= min_age;
+    }
+
+</script>

@@ -1,8 +1,8 @@
-package com.example.lab3.managers;
+package upf.managers;
 
-import com.example.lab3.models.Login;
-import com.example.lab3.models.User;
-import com.example.lab3.utils.DB;
+import upf.models.Login;
+import upf.models.User;
+import upf.utils.DB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,7 +64,8 @@ public class ManageUsers {
     public boolean isComplete(Login user) {
         return ( hasValue(user.getUser()) &&
                 hasValue(user.getPassword()) &&
-                isValidPassword(user.getUser(), user.getPassword())
+                isRegisteredUser(user) &&
+                isValidPassword(user)
                 );
 
     }
@@ -108,18 +109,29 @@ public class ManageUsers {
         return selectColumn(phoneNumber, query);
     }
 
-    private boolean isValidPassword(String u, String p) {
+    private boolean isRegisteredUser(Login u) {
+        boolean user_registered = getUserFromDB(u.getUser());
+        if (!user_registered)
+            u.isAnyError("user");
+
+        return user_registered;
+    }
+
+    private boolean isValidPassword(Login u) {
         String query = "SELECT pwd FROM users WHERE usr = ?";
 
         try (PreparedStatement statement = db.prepareStatement(query)) {
-            statement.setString(1, u);
+            statement.setString(1, u.getUser());
             ResultSet r = statement.executeQuery();
-            if (r.next()){
-                return r.getString("pwd").equals(p);
-            }
+            if (r.next() && r.getString("pwd").equals(u.getPassword()))
+                return true;
+            else
+                u.isAnyError("password");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return false;
     }
 

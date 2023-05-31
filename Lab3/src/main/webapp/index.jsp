@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function() {
 	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!	
 	$(document).on("click",".menu", async function(event) {
 		//$('#content').load('ContentController',{content: $(this).attr('id')});
@@ -51,11 +51,6 @@ $(document).ready(function(){
     		x.className = x.className.replace(" w3-show", "");
   			}
 		}
-
-		function setCheckbox(input) {
-			input.value = input.checked;
-		}
-
 	</script>
 
   </body>
