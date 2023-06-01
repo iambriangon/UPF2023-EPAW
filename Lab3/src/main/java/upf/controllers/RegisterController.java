@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -48,10 +49,15 @@ public class RegisterController extends HttpServlet {
 		
 		   if (manager.isComplete(user)) {
 			   
-			   System.out.println(" user ok, forwarding to ViewLoginForm");
+			   System.out.println(" user ok, forwarding to ViewLoginDone");
 			   manager.addUser(user.getUsername(), user.getMail(), user.getPwd1(), user.getBirthday(), user.getGender(), user.getPhoneNumber(), user.isTerms(), user.isNewsletter());
 			   manager.finalize();
-			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
+
+			   HttpSession session = request.getSession();
+			   session.setAttribute("user", user.getUsername());
+
+			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
+			   //RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			   dispatcher.forward(request, response);
 		   
 		   } 

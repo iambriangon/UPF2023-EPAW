@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<ul class="server-errors-list">
+<ul class="w3-ul w3-red w3-round server-errors-list" style="width:30%">
     <c:if test = "${login.error.user}">
         <li> Entered user is not registered </li>
     </c:if>
@@ -12,6 +12,9 @@
     </c:if>
 </ul>
 
+<h1 class="w3-bottombar w3-text-black">
+    Login
+</h1>
 <form action="LoginController" method="POST">
 	<p>      
         <label class="w3-text-red"><b> Username </b></label>

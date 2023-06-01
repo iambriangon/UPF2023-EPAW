@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<ul class="server-errors-list">
+<ul class="w3-ul w3-red w3-round server-errors-list" style="width:30%">
     <c:if test = "${user.error.username}">
         <li> Entered username has been already registered </li>
     </c:if>

@@ -62,7 +62,7 @@ public class ManageUsers {
     }
 
     public boolean isComplete(Login user) {
-        return ( hasValue(user.getUser()) &&
+        return (hasValue(user.getUser()) &&
                 hasValue(user.getPassword()) &&
                 isRegisteredUser(user) &&
                 isValidPassword(user)
