@@ -1,0 +1,53 @@
+
+.BarMenu {
+    width: 250px;
+    height: 319px;
+    position: absolute;
+    left: 53px;
+    top: 213px;
+}
+
+.Logo {
+    width: 371px;
+    height: 194px;
+    position: absolute;
+    left: 54px;
+    top: 0px;
+}
+
+.Home, .Profile, .Explore .MyMovies .Settings{
+    width: 175px;
+    height: 59px;
+    position: absolute;
+    color: white;
+    font-size: 36px;
+    font-family: Inter;
+    font-weight: 300;
+    word-wrap: break-word;
+}
+
+.Home {
+    left: 1px;
+    top: 0px;
+}
+
+.Profile {
+    left: 1px;
+    top: 65px;
+}
+
+.Explore {
+    left: 1px;
+    top: 130px;
+}
+
+.MyMovies{
+	left:1px;
+	top:195px;
+}
+
+.Settings{
+	left:1px;
+	top:255px;
+}
+
