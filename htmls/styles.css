@@ -1,0 +1,101 @@
+body, html {
+    height: 100%;
+    margin-top: 0;
+    background: linear-gradient(180deg, #C80707 0%, #831010 100%);
+}
+
+.BarMenu {
+    padding: 0;
+    background: linear-gradient(180deg, #C80707 0%, #831010 100%);
+}
+
+.Logo {
+    text-align:center;
+	transform: scale(0.8,0.8);
+}
+
+.Home, .Profile, .Explore, .MyMovies, .Settings {
+    margin-top: 9%;
+    color: #FFF;
+    text-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.30);
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: 300;
+    text-align: left;
+    justify-content: space-evenly;
+    word-wrap: break-word;
+}
+
+.LegalTerms, .AboutUs, .Privacy, .Copyright {
+    color: #FFF;
+    text-align: justify;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: 300;
+    text-decoration-line: underline;
+}
+
+a{
+    color: #ffffff;
+}
+
+a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.BigRectangle {
+	margin-top: 2%;
+    background: rgba(0, 0, 0, 0.50);
+    border: 2px solid rgba(0, 0, 0, 0.70);
+    border-radius: 48px 48px 0px 0px;
+    z-index: 1;
+}
+
+.LeftSide{
+    background-image: url("imgs/left-waves.png");
+    background-size: cover;
+    background-position: right;
+}
+.RightSide{
+    background-image: url("imgs/right-waves.png");
+    background-size: cover;
+    background-position: left;
+}
+
+.align-items-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BlackButton{
+    background-color: black;
+    border-radius: 25px;
+    border-color: black;
+    color: white;
+    width: 300px;
+    padding: 4px;
+    margin: 10px;
+}
+
+.WhiteOutlineButton{
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 25px;
+    border-color: white;
+    color: white;
+    width: 300px;
+    padding: 4px;
+    margin: 10px;
+}
+
+.white-text{
+    color:#FFF
+}
+
+/**
+*{
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+**/
