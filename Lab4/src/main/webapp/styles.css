@@ -11,7 +11,7 @@ body, html {
 
 .Logo {
     text-align:center;
-	transform: scale(0.8,0.8);
+    transform: scale(0.8,0.8);
 }
 
 .Home, .Profile, .Explore, .MyMovies, .Settings {
@@ -36,9 +36,48 @@ body, html {
 }
 
 .BigRectangle {
-	margin-top: 2%;
+    margin-top: 3%;
     background: rgba(0, 0, 0, 0.50);
     border: 2px solid rgba(0, 0, 0, 0.70);
     border-radius: 48px 48px 0px 0px;
     z-index: 1;
+    padding: 2% 2% 0 2%;
+    position: relative;
 }
+
+.form-inline{
+	margin-top: 20%;
+}
+
+.form-control {
+    background-color: #f00; 
+    color: #fff; 
+}
+
+.btn-outline-success {
+    background-color: #f00; 
+    color: #fff; 
+}
+.card {
+	position: relative; 
+	margin-top: 10%;
+    width: 100%; 
+    height: 18%;
+    margin: auto; 
+    overflow: hidden;
+    border-radius:50px 50px 50px 50px;
+}
+
+.card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+

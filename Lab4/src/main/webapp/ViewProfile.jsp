@@ -2,6 +2,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,7 +31,16 @@
                     </div>
                 </div>
             </div>
-            <div class="BigRectangle col-9"></div>
+           	<div class="BigRectangle col-9">
+			    <form class="form-inline my-2 my-lg-0">
+			        <input class="form-control mr-sm-2" type="search" placeholder="Search on Twitflix" aria-label="Search">
+			        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			    </form>
+			    <div class="card" style="width: 100%; height: 18%;">
+	   				<img class="card-img" src="imgs/mountains.jpg" alt="Descripción de la imagen">
+	   				<div class="card-img-overlay d-flex align-items-end"></div>
+				</div>
+			</div>
         </div>
     </div>
 </body>
