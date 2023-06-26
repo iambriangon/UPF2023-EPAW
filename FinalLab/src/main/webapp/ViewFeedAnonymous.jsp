@@ -11,7 +11,7 @@
         <div class="BarMenu col-3" style="flex: 0 0 18%; max-width: 18%;">
             <div class="d-flex flex-column h-100">
                 <div class="p-2">
-                    <img class="Logo img-fluid" src="imgs/logowhite.png" alt="Logo">
+                    <img class="Logo img-fluid" src="imgs/logo-white.png" alt="Logo">
                 </div>
                 <div class="p-2" id="left-bar">
                     <div class="Home">Landing Page</div>

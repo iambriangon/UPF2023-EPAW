@@ -1,7 +1,19 @@
+:root {
+    --bs-body-font-family: 'Inter', sans-serif;
+}
+
 body, html {
     height: 100%;
     margin-top: 0;
     background: linear-gradient(180deg, #C80707 0%, #831010 100%);
+}
+
+a {
+    color: #ffffff;
+}
+
+a:hover {
+    color: rgb(255, 255, 255);
 }
 
 .BarMenu {
@@ -11,40 +23,38 @@ body, html {
 
 .Logo {
     text-align:center;
-	transform: scale(0.8,0.8);
+    transform: scale(0.8,0.8);
 }
+
 
 .Home, .Profile, .Explore, .MyMovies, .Settings {
     margin-top: 9%;
     color: #FFF;
     text-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.30);
     font-size: 20px;
-    font-family: Arial;
     font-weight: 300;
     text-align: left;
     justify-content: space-evenly;
     word-wrap: break-word;
+    cursor: pointer;
+}
+
+:where(.Home, .Profile, .Explore, .MyMovies, .Settings):hover {
+    font-weight: 500;
 }
 
 .LegalTerms, .AboutUs, .Privacy, .Copyright {
     color: #FFF;
     text-align: justify;
     font-size: 16px;
-    font-family: Arial;
     font-weight: 300;
     text-decoration-line: underline;
 }
 
-a{
-    color: #ffffff;
-}
 
-a:hover {
-    color: rgb(255, 255, 255);
-}
 
 .BigRectangle {
-	margin-top: 2%;
+    margin-top: 2%;
     background: rgba(0, 0, 0, 0.50);
     border: 2px solid rgba(0, 0, 0, 0.70);
     border-radius: 48px 48px 0px 0px;
@@ -52,12 +62,12 @@ a:hover {
 }
 
 .LeftSide{
-    background-image: url("imgs/left-waves.png");
+    background-image: url("./imgs/left-waves.png");
     background-size: cover;
     background-position: right;
 }
 .RightSide{
-    background-image: url("imgs/right-waves.png");
+    background-image: url("./imgs/right-waves.png");
     background-size: cover;
     background-position: left;
 }
@@ -88,14 +98,35 @@ a:hover {
     margin: 10px;
 }
 
+.AnonButton {
+    width: auto;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.Background {
+    background: linear-gradient(180deg, #C80707 0%, #831010 100%);
+}
+
+.SearchBar {
+    border-radius: 64px;
+    text-align: center;
+}
+.SubTitle {
+    font-weight: 800;
+    font-size: 36px;
+    color: white;
+}
+.nav-tag{}
+
 .white-text{
     color:#FFF
 }
 
-/**
-*{
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
+.test {
+    background-color: blue;
 }
-**/
+
+.test2 {
+    background-color: cadetblue;
+}
