@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script type="text/javascript">
@@ -29,6 +29,19 @@
                     $('#content').load($(this).attr('action'),$(this).serialize());
                     event.preventDefault();
                 });
+
+
+                //Add tweet
+                $(document).on("click","#addTweetTag", function(event){
+                    $.post( "AddTweet", { content: $("#tweetContentTag").val()}, function(event) {
+                        $("#feed-container").load("GetProfile");
+                    });
+                    event.preventDefault();
+                });
+
+
+
+                // Update Username
 
             });
         </script>

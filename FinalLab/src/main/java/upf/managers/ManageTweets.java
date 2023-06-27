@@ -88,6 +88,32 @@ public class ManageTweets {
 		} 
 		return  l;
 	}
+
+	/* Get tweets from all users given start and end*/
+	public List<Tweet> getAllUserTweets(Integer limit) {
+		String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id ORDER BY tweets.postdatetime DESC LIMIT ? ;";
+		PreparedStatement statement = null;
+		List<Tweet> l = new ArrayList<Tweet>();
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,limit);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				Tweet tweet = new Tweet();
+				tweet.setId(rs.getInt("id"));
+				tweet.setUid(rs.getInt("uid"));
+				tweet.setPostDateTime(rs.getTimestamp("postdatetime"));
+				tweet.setContent(rs.getString("content"));
+				tweet.setUname(rs.getString("name"));
+				l.add(tweet);
+			}
+			rs.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  l;
+	}
 	
 	
 }

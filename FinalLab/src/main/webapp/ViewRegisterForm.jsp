@@ -53,7 +53,7 @@
                     <label for="newsletter" class="form-check-label white-text">Subscribe to email newsletter:</label>
                     <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter" onclick="setCheckbox(this)"><br>
 
-                    <input class="w3-btn w3-theme BlackButton" type="submit" name="sumbit" value="Submit">
+                    <input class="BlackButton" type="submit" name="sumbit" value="Submit">
                 </p>
             </form>
 

@@ -18,7 +18,7 @@ public class MainController extends HttpServlet {
         }
         else {
             System.out.println("Main Controller: active session has been found.");
-            request.setAttribute("content","ViewOwnTimeline.jsp");
+            request.setAttribute("content","ViewFeedLogin.jsp");
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");

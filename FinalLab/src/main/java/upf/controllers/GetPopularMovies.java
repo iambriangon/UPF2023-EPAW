@@ -19,6 +19,9 @@ public class GetPopularMovies extends HttpServlet {
         movies.add("Avatar");
         movies.add("Harry Potter");
         movies.add("Pokemon");
+        movies.add("Avatar2");
+        movies.add("Harry Potter2");
+        movies.add("Pokemon2");
 
         request.setAttribute("movies", movies);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ViewPopularMovies.jsp");

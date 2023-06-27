@@ -2,7 +2,9 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#popular-movies').load('GetPopularMovies');
+        // Load by default Feed Home
+        $('#feed-container').load('GetFeedHome');
+
     });
 </script>
 
@@ -14,7 +16,7 @@
                     <img class="Logo img-fluid" src="imgs/logo-white.png" alt="Logo">
                 </div>
                 <div class="p-2" id="left-bar">
-                    <div class="Home">Landing Page</div>
+                    <div class="Home nav-tag" id="MainController">Landing Page</div>
                 </div>
                 <div class="mt-auto p-2">
                     <div class="LegalTerms"><a>Legal Terms</a></div>
@@ -24,23 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="BigRectangle col-9" style="flex: 0 0 80%; max-width: 80%;">
-            <div class="p-3">
-                <input class="SearchBar" type="search" placeholder="Search on Twitflix">
-            </div>
-
-            <div>
-                <p class="SubTitle">Popular Movies and Shows</p>
-                <div id="popular-movies">
-                </div>
-            </div>
-
-            <div>
-                <p class="SubTitle">Feed</p>
-                <div id="Feed">
-                </div>
-            </div>
-
+        <div class="BigRectangle col-9" id="feed-container" style="flex: 0 0 80%; max-width: 80%;">
         </div>
     </div>
 </div>
