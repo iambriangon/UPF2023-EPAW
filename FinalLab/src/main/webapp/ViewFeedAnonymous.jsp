@@ -13,6 +13,12 @@
             $('#feed-container').load($(this).attr('id'));
             event.preventDefault();
         });
+
+        // Enter Profile Other User
+        $(document).on("click", "#enterProfileTag", function (event) {
+            $("#feed-container").load("GetProfileOtherUsers", {id: $(this).parent().attr('id')});
+            event.preventDefault();
+        });
     });
 </script>
 

@@ -1,6 +1,7 @@
 package upf.controllers;
 
 import upf.managers.ManageUsers;
+import upf.models.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,15 +13,23 @@ public class UpdateUsername extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        boolean error = true;
+        HttpSession session = request.getSession(false);
         System.out.println("Update Username: ");
+        boolean error = true;
+        String message = "Error";
 
+        String newName = request.getParameter("content");
+        User user = (User) session.getAttribute("user");
         ManageUsers userManager = new ManageUsers();
+        error = userManager.updateUsername(user.getId(), newName);
 
-        String newUser = request.getParameter("content");
-        System.out.println("New User is: " + newUser);
+        if(!error) {
+            user.setName(newName);
+            session.setAttribute("user", user);
+            message="Success";
+        }
 
-        request.setAttribute("error", error);
+        request.setAttribute("message", message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ViewSettings.jsp");
         dispatcher.forward(request, response);
     }

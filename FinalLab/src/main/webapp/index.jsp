@@ -30,8 +30,22 @@
                     event.preventDefault();
                 });
 
+                // Update User by Adming
+                $(document).on("click", '#updateUserAdminTag', function (event){
+                    var user_id = $('#user-id-admin');
+                    var newEmail =$('#update-user-email-admin').val();
+                    var newPhone =$('#update-user-phone-admin').val();
+                    var newPassword =$('#update-user-pwd-admin').val();
 
-                // Delete Tweet
+                    if (user_id.val() === "") {
+                        user_id[0].setCustomValidity("You must enter a user id in order to modify!");
+                        user_id[0].reportValidity();
+                    }
+                    else {
+                        $("#content").load("UpdateUserAdmin",  { userId: user_id.val(), email: newEmail, phone: newPhone, pwd: newPassword});
+                    }
+                    event.preventDefault();
+                });
 
             });
         </script>

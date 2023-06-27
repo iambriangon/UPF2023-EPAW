@@ -26,7 +26,14 @@
 </div>
 
 <div class="white-text">
-    <c:if test = "${error}">
-        <li> There was an error updating the user / password </li>
-    </c:if>
+    <c:choose>
+        <c:when test="${message.equals('Error')}">
+            <li> There was an error</li>
+        </c:when>
+        <c:when test="${message.equals('Success')}">
+            <li> Update successfull! </li>
+        </c:when>
+        <c:otherwise>
+        </c:otherwise>
+    </c:choose>
 </div>

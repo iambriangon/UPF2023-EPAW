@@ -35,9 +35,12 @@ public class LoginController extends HttpServlet {
                     System.out.println("login OK, forwarding to ViewFeedLogin ");
                     HttpSession session = request.getSession();
                     session.setAttribute("user", pair.getRight());
-                    view = "ViewFeedLogin.jsp";
-
+                    if (user.getName().equals("admin"))
+                        view = "ViewAdmin.jsp";
+                    else
+                        view = "ViewFeedLogin.jsp";
                 }
+
                 else {
                     System.out.println("user is not logged (user not found), forwarding to ViewLoginForm ");
                     request.setAttribute("error", true);

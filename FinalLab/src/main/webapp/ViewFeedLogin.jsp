@@ -55,7 +55,14 @@
 
         // Update User
         $(document).on("click", '#updateUserTag', function (event){
-            $("#feed-container").load("UpdateUsername",  { content: $('#username-change').val()});
+            var username = $('#username-change')
+            if (username.val() === ""){
+                username[0].setCustomValidity("A username cannot be blank!");
+                username[0].reportValidity();
+            }
+            else {
+                $("#feed-container").load("UpdateUsername",  { content: username.val()});
+            }
             event.preventDefault();
         });
 
@@ -65,9 +72,8 @@
                 var pwd1 = $('#pwd1-change')
                 var pwd2 = $('#pwd2-change')
 
-
-                if(!pwd1[0].checkValidity()){
-                    pwd1[0].setCustomValidity("Enter the correct password format!");
+                if(pwd1.val() === ""){
+                    pwd1[0].setCustomValidity("A password cannot be blank!");
                     pwd1[0].reportValidity();
 
                 }

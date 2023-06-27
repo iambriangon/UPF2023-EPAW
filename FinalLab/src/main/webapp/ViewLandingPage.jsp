@@ -10,12 +10,15 @@
                     <div class="row align-items-center">
                         <img src="imgs/logo-white-centered.png"   style="min-width: 15%;max-width: 500px;">
                     </div>
+
                     <div class="row align-items-center">
-                        <a class="align-items-center" href="${pageContext.request.contextPath}/LoginController"><button class="BlackButton nav-tag" id="LoginController"> Log In</button></a>
+                        <button class="BlackButton nav-tag" id="LoginController"> Log In</button>
                     </div>
+
                     <div class="row align-items-center">
                         <button class="WhiteOutlineButton nav-tag" id="RegisterController">First time? Register</button>
                     </div>
+
                     <div class="row align-items-center">
                         <p class="AnonButton text-center nav-tag" id="AnonLoginController">Explore anonymously</p>
                     </div>

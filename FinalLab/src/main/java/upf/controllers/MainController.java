@@ -1,5 +1,7 @@
 package upf.controllers;
 
+import upf.models.User;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -18,7 +20,11 @@ public class MainController extends HttpServlet {
         }
         else {
             System.out.println("Main Controller: active session has been found.");
-            request.setAttribute("content","ViewFeedLogin.jsp");
+            User user = (User) session.getAttribute("user");
+            if (user.getName().equals("admin"))
+                request.setAttribute("content","ViewAdmin.jsp");
+            else
+                request.setAttribute("content","ViewFeedLogin.jsp");
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");

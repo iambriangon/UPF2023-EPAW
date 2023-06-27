@@ -187,6 +187,95 @@ public class ManageUsers {
 		} 
 		return  l;
 	}
+
+	public boolean updatePassword(int id, String newPass) {
+		String query = "UPDATE users SET pwd = ? WHERE id = ?;";
+		PreparedStatement statement = null;
+		boolean error = true;
+
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, newPass);
+			statement.setInt(2, id);
+			if (statement.executeUpdate() > 0){
+				error = false;
+			}
+
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return error;
+	}
+
+	public boolean updateUsername(int id, String newUsername) {
+		String query = "UPDATE users SET name = ? WHERE id = ?;";
+		PreparedStatement statement = null;
+		boolean error = true;
+
+		// Username taken
+		if (checkUser(newUsername)) return error;
+
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, newUsername);
+			statement.setInt(2, id);
+			if (statement.executeUpdate() > 0){
+				error = false;
+			}
+
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return error;
+	}
+
+	public boolean updateEmail(int id, String newEmail) {
+		String query = "UPDATE users SET mail = ? WHERE id = ?;";
+		PreparedStatement statement = null;
+		boolean error = true;
+
+		// Email taken
+		if (checkMail(newEmail)) return error;
+
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, newEmail);
+			statement.setInt(2, id);
+			if (statement.executeUpdate() > 0){
+				error = false;
+			}
+
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return error;
+	}
+
+	public boolean updatePhone(int id, String newPhone) {
+		String query = "UPDATE users SET phoneNumber = ? WHERE id = ?;";
+		PreparedStatement statement = null;
+		boolean error = true;
+
+		// Phone taken
+		if (checkPhone(newPhone)) return error;
+
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, newPhone);
+			statement.setInt(2, id);
+			if (statement.executeUpdate() > 0){
+				error = false;
+			}
+
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return error;
+	}
 	
 	public Pair<Boolean,User> checkLogin(User user) {
 		
@@ -241,6 +330,34 @@ public class ManageUsers {
 		
 		return output;
 		
+	}
+
+	public boolean checkUserById(String user) {
+
+		String query = "SELECT name from users where id=?";
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		boolean output = false;
+		try {
+
+			statement = db.prepareStatement(query);
+			statement.setString(1,user);
+			rs = statement.executeQuery();
+			if (rs.isBeforeFirst()) {
+				output = true;
+			}
+			rs.close();
+			statement.close();
+			return output;
+
+		} catch (SQLIntegrityConstraintViolationException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return output;
+
 	}
 
 	public boolean checkPhone(String phone){

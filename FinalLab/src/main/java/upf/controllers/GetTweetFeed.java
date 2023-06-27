@@ -22,17 +22,16 @@ public class GetTweetFeed extends HttpServlet {
         System.out.println("Getting Tweet Feed: ");
 
         List<Tweet> tweets = new ArrayList<>();
-        User user = (User) session.getAttribute("user");
         ManageTweets tweetManager = new ManageTweets();
 
-
-        if (session.getAttribute("user") == null) {
+        if ( session == null || session.getAttribute("user") == null) {
             // If user anon get last published tweets
             System.out.println("!!!TweetFeed Anon User!!!!!");
             tweets = tweetManager.getAllUserTweets(5);
         }
         else {
             // If user logged in get tweets of followers
+            User user = (User) session.getAttribute("user");
             tweets = tweetManager.getUserFollowedTweets(user.getId(),0,4);
         }
         tweetManager.finalize();
