@@ -27,7 +27,7 @@ a:hover {
 }
 
 
-.Home, .Profile, .Explore, .MyMovies, .Settings {
+.Home, .Profile, .Explore, .MyMovies, .Settings, .LogOut {
     margin-top: 9%;
     color: #FFF;
     text-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.30);
@@ -39,7 +39,7 @@ a:hover {
     cursor: pointer;
 }
 
-:where(.Home, .Profile, .Explore, .MyMovies, .Settings):hover {
+:where(.Home, .Profile, .Explore, .MyMovies, .Settings, .LogOut):hover {
     font-weight: 500;
 }
 
@@ -51,15 +51,16 @@ a:hover {
     text-decoration-line: underline;
 }
 
-
-
 .BigRectangle {
     margin-top: 2%;
     background: rgba(0, 0, 0, 0.50);
     border: 2px solid rgba(0, 0, 0, 0.70);
     border-radius: 48px 48px 0px 0px;
     z-index: 1;
+    position: relative;
+    overflow-y: scroll;
 }
+
 
 .LeftSide{
     background-image: url("./imgs/left-waves.png");
@@ -108,25 +109,225 @@ a:hover {
     background: linear-gradient(180deg, #C80707 0%, #831010 100%);
 }
 
+.search-container {
+	margin-top: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: left-side;
+    margin-bottom: 20px;
+}
 .SearchBar {
     border-radius: 64px;
     text-align: center;
+    width: 40%;
 }
 .SubTitle {
     font-weight: 800;
     font-size: 36px;
     color: white;
 }
-.nav-tag{}
 
 .white-text{
     color:#FFF
 }
 
-.test {
-    background-color: blue;
+.nav-tag, .left-nav{
 }
 
-.test2 {
-    background-color: cadetblue;
+.test {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-width: 2px;
+}
+
+.bubble {
+    border-radius: 50%;
+    border-color:rgb(255, 118, 33);
+    border-style: solid;
+    border-width: 4px;
+    max-width: 100px;
+    min-width: 100px;
+    max-height: 100px;
+    min-height: 100px;
+    object-fit: cover;
+    transition: 0.7s;
+}
+
+.bubble:hover {
+    border-color:rgb(202, 25, 230);
+    box-shadow: 0 4px 8px 0 rgba(255, 36, 240, 0.663), 0 6px 20px 0 rgba(120, 11, 87, 0.621);
+    max-width: 106px;
+    min-width: 106px;
+    max-height: 106px;
+    min-height: 106px;
+    transition: 0.6s;
+}
+
+.bubble-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    margin: 8px;
+    max-width: 110px;
+    min-width: 110px;
+    max-height: 150px;
+    min-height: 150px;
+}
+
+.bubble-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+
+article{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 14px;
+    max-width: 100%;
+    min-width: 100%;
+    display: inline-block;
+    break-inside: avoid;
+}
+
+.tweet-profile-pic {
+    border-radius: 50%;
+    max-width: 60px;
+    min-width: 60px;
+    max-height: 60px;
+    min-height: 60px;
+    object-fit: cover;
+}
+
+.mini-bubble {
+    border-radius: 50%;
+    border-color:rgb(255, 118, 33);
+    border-style: solid;
+    border-width: 2px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    min-height: 40px;
+    object-fit: cover;
+}
+
+.tweet-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.tweet-user-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 100%;
+}
+
+.tweet-bubble-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    float: right;
+}
+
+.tweet-username{
+    margin: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+
+.tweet-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 8px 14px 8px 14px;
+}
+
+.tweet-date-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.tweet-date{
+    margin:1px;
+}
+
+.tweet-mosaic{
+    width: 100%;
+    margin: 1em auto;
+    /*column-count: 2; 
+    column-gap: 1em;*/
+    height:100%;
+}
+.banner {
+    position: relative;
+    width: 90%;
+    height: 15vh;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    overflow: visible;
+    border-radius: 10px;
+}
+
+.banner .cover-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 100px;
+}
+
+
+.tweet-section {
+	margin-top: 20%;
+    width: 90%;
+    margin: auto;
+}
+
+.profile-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tweets-section { 
+    margin-top: 20px;
+}
+.profpic {
+    border-radius: 50%;
+    border-color:rgb(255, 118, 33);
+    border-style: solid;
+    border-width: 4px;
+    max-width: 200px; 
+    min-width: 200px; 
+    max-height: 200px; 
+    min-height: 200px; 
+    object-fit: cover;
+    transition: 0.7s;
+    position: relative; 
+    z-index: 1; 
+}
+
+.banner .profile-pic {
+    position: absolute;
+    bottom: -150px; /* Cambiado de -50px a -75px */
+    left: 20px;
 }

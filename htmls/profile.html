@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="search-container">
+        <input class="SearchBar" type="search" placeholder="Busca en Twitflix">
+    </div>
+
+    <div class="banner">
+        <img src="imgs/logo-white.png" alt="Foto de portada del usuario" class="cover-photo">
+        <div class="profile-pic">
+            <img class="profpic" src="imgs/left-waves.png" alt="Foto en círculo">
+        </div>
+    </div>
+
+    <div class="tweet-section">
+        <div class="profile-info">
+            <h6 class="white-text">@username</h6>
+            <div class="white-text">
+                <p>Comparte tus pensamientos sobre películas:</p>
+                <textarea id="tweetContentTag" class="form-control" aria-label="With textarea"></textarea>
+                <input id="addTweetTag" class="BlackButton" type="submit" name="submit" value="Publicar">
+            </div>
+        </div>
+
+        <div class="tweets-section">
+            <p class="SubTitle">Mis Tweets</p>
+            <div id="userTweetsTag"></div>
+        </div>
+    </div>
+</body>

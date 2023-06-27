@@ -58,6 +58,7 @@ a:hover {
     border-radius: 48px 48px 0px 0px;
     z-index: 1;
     position: relative;
+    overflow-y: scroll;
 }
 
 
@@ -328,5 +329,6 @@ article{
     position: absolute;
     bottom: -150px; /* Cambiado de -50px a -75px */
     left: 20px;
+    margin: 100px;
 }
 

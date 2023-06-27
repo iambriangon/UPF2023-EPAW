@@ -18,18 +18,17 @@
     </div>
 </div>
 
-<div class="tweet-section">
-    <div class="profile-info">
-        <h6 class="white-text">@${user.name}</h6>
-        <div class="white-text">
-            <p>Comparte tus pensamientos sobre películas:</p>
-            <textarea id="tweetContentTag" class="form-control" aria-label="With textarea"></textarea>
-            <input id="addTweetTag" class="BlackButton" type="submit" name="submit" value="Publicar">
-        </div>
-    </div>
+<div class="profile-info">
+    <h6 class="white-text">@${user.name}</h6>
+</div>
 
-    <div class="tweets-section">
-        <p class="SubTitle">Mis Tweets</p>
-        <div id="userTweetsTag"></div>
-    </div>
+<div class="tweet-section">
+    <p>Comparte tus pensamientos sobre películas:</p>
+    <textarea id="tweetContentTag" class="form-control" aria-label="With textarea"></textarea>
+    <input id="addTweetTag" class="BlackButton" type="submit" name="submit" value="Publicar">
+</div>
+
+<div class="tweets-section">
+    <p class="SubTitle">Mis Tweets</p>
+    <div id="userTweetsTag"></div>
 </div>
