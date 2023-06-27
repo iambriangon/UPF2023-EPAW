@@ -38,11 +38,39 @@
                     var newPassword =$('#update-user-pwd-admin').val();
 
                     if (user_id.val() === "") {
-                        user_id[0].setCustomValidity("You must enter a user id in order to modify!");
+                        user_id[0].setCustomValidity("You must enter a user id in order to delt!");
                         user_id[0].reportValidity();
                     }
                     else {
                         $("#content").load("UpdateUserAdmin",  { userId: user_id.val(), email: newEmail, phone: newPhone, pwd: newPassword});
+                    }
+                    event.preventDefault();
+                });
+
+                // Delete Tweet by Adming
+                $(document).on("click", '#deleteTweetAdminTag', function (event){
+                    var tweet_id = $('#delete-tweet-admin');
+
+                    if (tweet_id.val() === "") {
+                        tweet_id[0].setCustomValidity("You must enter a tweet id in order to delete!");
+                        tweet_id[0].reportValidity();
+                    }
+                    else {
+                        $("#content").load("DeleteTweetAdmin",  { tweetId: tweet_id.val()});
+                    }
+                    event.preventDefault();
+                });
+
+                // Delete User by Adming
+                $(document).on("click", '#deleteUserAdminTag', function (event){
+                    var user_id = $('#delete-user-admin');
+
+                    if (user_id.val() === "") {
+                        user_id[0].setCustomValidity("You must enter a user id in order to delete!");
+                        user_id[0].reportValidity();
+                    }
+                    else {
+                        $("#content").load("DeleteUserAdmin",  { userId: user_id.val()});
                     }
                     event.preventDefault();
                 });

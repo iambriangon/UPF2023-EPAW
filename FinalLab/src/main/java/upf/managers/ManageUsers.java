@@ -276,6 +276,22 @@ public class ManageUsers {
 		}
 		return error;
 	}
+
+	public boolean deleteUserById(Integer id) {
+		String query = "DELETE FROM users WHERE id = ? ";
+		PreparedStatement statement = null;
+		boolean status = false;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,id);
+			if (statement.executeUpdate() > 0)
+				status = true;
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
 	
 	public Pair<Boolean,User> checkLogin(User user) {
 		

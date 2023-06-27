@@ -8,6 +8,6 @@
 <c:forEach var="m" items="${movies}">
     <div class="movie-card">
         <img class="movie-card-pic" src="./imgs/content/${m}.jpg">
-        <p class="movie-card-name">${m}</p>
+        <p class="movie-card-name white-text">${m}</p>
     </div>
 </c:forEach>

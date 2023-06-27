@@ -24,9 +24,9 @@ public class UpdateUserAdmin extends HttpServlet {
         error.put("pwd", false);
 
         String userId = request.getParameter("userId");
-        String newEmail = request.getParameter("newEmail");
-        String newPhone = request.getParameter("newPhone");
-        String newPassword = request.getParameter("newPassword");
+        String newEmail = request.getParameter("email");
+        String newPhone = request.getParameter("phone");
+        String newPassword = request.getParameter("pwd");
 
         if(userManager.checkUserById(userId)) { // If user is registered
             if (!newPhone.isEmpty()) {

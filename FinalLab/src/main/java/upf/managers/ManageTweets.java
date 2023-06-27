@@ -60,11 +60,27 @@ public class ManageTweets {
 			e.printStackTrace();
 		}
 	}
+
+	public boolean deleteTweetById(Integer id) {
+		String query = "DELETE FROM tweets WHERE id = ? ";
+		PreparedStatement statement = null;
+		boolean status = false;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,id);
+			if (statement.executeUpdate() > 0)
+				status = true;
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
 	
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end) {
-		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? ORDER BY tweets.postdatetime DESC LIMIT ?,? ;";
+		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name,tweets.movie FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? ORDER BY tweets.postdatetime DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -80,6 +96,7 @@ public class ManageTweets {
 				 tweet.setPostDateTime(rs.getTimestamp("postdatetime"));
 				 tweet.setContent(rs.getString("content"));
 				 tweet.setUname(rs.getString("name"));
+				 tweet.setMovie(rs.getString("movie"));
 				 l.add(tweet);
 			 }
 			 rs.close();
@@ -92,7 +109,7 @@ public class ManageTweets {
 
 	/* Get tweets from a followed users  given start and end*/
 	public List<Tweet> getUserFollowedTweets(Integer uid,Integer start, Integer end) {
-		String query = "SELECT t.id,t.uid,t.postdatetime,t.content, u.name FROM tweets t INNER JOIN (SELECT id, name FROM users, follows WHERE id = fid AND uid = ?) u ON t.uid = u.id ORDER BY t.postdatetime DESC LIMIT ?,? ;";
+		String query = "SELECT t.id,t.uid,t.postdatetime,t.content,u.name,t.movie FROM tweets t INNER JOIN (SELECT id, name FROM users, follows WHERE id = fid AND uid = ?) u ON t.uid = u.id ORDER BY t.postdatetime DESC LIMIT ?,? ;";
 		PreparedStatement statement = null;
 		List<Tweet> l = new ArrayList<Tweet>();
 		try {
@@ -108,6 +125,7 @@ public class ManageTweets {
 				tweet.setPostDateTime(rs.getTimestamp("postdatetime"));
 				tweet.setContent(rs.getString("content"));
 				tweet.setUname(rs.getString("name"));
+				tweet.setMovie(rs.getString("movie"));
 				l.add(tweet);
 			}
 			rs.close();

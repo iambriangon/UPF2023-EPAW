@@ -7,12 +7,12 @@
         <article>
             <div class="tweet-header">
                 <div class="tweet-user-div">
-                    <img class="tweet-profile-pic" src="./imgs/content/avatar-2.jpeg">
+                    <img class="tweet-profile-pic" src="./imgs/content/profile-pic-default.jpg">
                     <p class="tweet-username">${t.uname}</p>
                 </div>
                 <div id="${t.id}" class="tweet-bubble-div">
                     <btn id="deleteTweetTag" class="delete-tweet">Delete</btn>
-                    <img class="mini-bubble" src="./imgs/content/avatar-2.jpeg" alt="Avatar 2">
+                    <img class="mini-bubble" src="./imgs/content/${t.movie}.jpg" alt="${t.movie}">
                 </div>
             </div>
             <div class="tweet-body">

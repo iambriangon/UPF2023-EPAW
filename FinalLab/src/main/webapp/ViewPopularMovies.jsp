@@ -4,7 +4,7 @@
 <div class="bubble-list">
     <c:forEach var="m" items="${movies}">
         <div class="bubble-container">
-            <img class="bubble" src="./imgs/content/avatar-2.jpeg" alt="Avatar 2">
+            <img class="bubble" src="./imgs/content/${m}.jpg" alt="${m}">
             <p class="white-text">${m}</p>
         </div>
     </c:forEach>

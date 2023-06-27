@@ -7,11 +7,11 @@
         <article>
             <div class="tweet-header">
                 <div id="${t.uid}" class="tweet-user-div">
-                    <img id="enterProfileTag" class="tweet-profile-pic" src="./imgs/content/avatar-2.jpeg">
+                    <img id="enterProfileTag" class="tweet-profile-pic" src="./imgs/content/profile-pic-default.jpg">
                     <p class="tweet-username">${t.uname}</p>
                 </div>
                 <div class="tweet-bubble-div">
-                    <img class="mini-bubble" src="./imgs/content/avatar-2.jpeg" alt="Avatar 2">
+                    <img class="mini-bubble" src="./imgs/content/${t.movie}.jpg" alt="${m}">
                 </div>
             </div>
             <div class="tweet-body">

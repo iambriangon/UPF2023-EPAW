@@ -4,7 +4,7 @@
 <div class="user-list">
     <c:forEach var="u" items="${users}">       
         <div id="${u.id}" class="user-container">
-            <img id="enterProfileTag" class="bubble" src="./imgs/content/avatar-2.jpeg" alt="Avatar 2">
+            <img id="enterProfileTag" class="bubble" src="./imgs/content/profile-pic-default.jpg" alt="${u.name}">
             <p class="white-text"> ${u.name} </p>
             <button id="followUserTag" class="follow-btn">Follow</button>
         </div>
