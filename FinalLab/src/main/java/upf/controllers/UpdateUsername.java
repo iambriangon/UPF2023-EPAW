@@ -1,5 +1,7 @@
 package upf.controllers;
 
+import upf.managers.ManageUsers;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -11,9 +13,11 @@ public class UpdateUsername extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         boolean error = true;
-        String newUser = request.getParameter("content");
-
         System.out.println("Update Username: ");
+
+        ManageUsers userManager = new ManageUsers();
+
+        String newUser = request.getParameter("content");
         System.out.println("New User is: " + newUser);
 
         request.setAttribute("error", error);

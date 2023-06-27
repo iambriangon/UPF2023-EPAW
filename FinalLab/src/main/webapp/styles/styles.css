@@ -6,6 +6,11 @@ body, html {
     height: 100%;
     margin-top: 0;
     background: linear-gradient(180deg, #C80707 0%, #831010 100%);
+    overflow-y: hidden;
+}
+
+body::-webkit-scrollbar{
+    display: none;
 }
 
 a {
@@ -27,7 +32,7 @@ a:hover {
 }
 
 
-.Home, .Profile, .Explore, .MyMovies, .Settings, .LogOut {
+.Home, .Profile, .Explore, .MyMovies, .Settings, .LogOut, .Landing{
     margin-top: 9%;
     color: #FFF;
     text-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.30);
@@ -39,7 +44,7 @@ a:hover {
     cursor: pointer;
 }
 
-:where(.Home, .Profile, .Explore, .MyMovies, .Settings, .LogOut):hover {
+:where(.Home, .Profile, .Explore, .MyMovies, .Settings, .LogOut, .Landing):hover {
     font-weight: 500;
 }
 
@@ -51,7 +56,12 @@ a:hover {
     text-decoration-line: underline;
 }
 
+.BigRectangle::-webkit-scrollbar{
+    display: none;
+}
+
 .BigRectangle {
+    max-height: 98%;
     margin-top: 2%;
     background: rgba(0, 0, 0, 0.50);
     border: 2px solid rgba(0, 0, 0, 0.70);
@@ -201,6 +211,7 @@ article{
     max-height: 60px;
     min-height: 60px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .mini-bubble {
@@ -276,6 +287,7 @@ article{
     column-gap: 1em;*/
     height:100%;
 }
+
 .banner {
     position: relative;
     width: 90%;
@@ -295,40 +307,124 @@ article{
     border-radius: 10px;
 }
 
+.user-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    margin: 8px;
+    width:110px;
+    max-width: 110px;
+    min-width: 110px;
+    max-height: 175px;
+    min-height: 175px;
+}
+
+.user-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+
+.follow-btn{
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.delete-tweet{
+    background-color: rgb(196, 13, 13);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px 6px 2px 6px;
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.banner-container{
+    margin-top: 20px;
+    height: 156px;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.banner {
+    position: relative;
+    height: 66%;
+    width: 100%;
+    background-size: 100% 100%;
+    margin-bottom: 55px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #222;
+    border: 1px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+.profile-pic {
+    position: absolute;
+    height: 156px;
+    width: 156px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    bottom: 0;
+    left: 50px;
+    transform: translateY(50%);
+    object-fit: cover;
+}
+
+.profile-info {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    transform: translateY(130%) translateX(170px);
+    object-fit: cover;
+}
+
+.profile-username{
+    font-size: 28px;
+    font-weight: bolder;
+    color: white;
+}
 
 .tweet-section {
-	margin-top: 20%;
     width: 90%;
     margin: auto;
 }
 
-.profile-info {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .tweets-section { 
-    margin-top: 20px;
+    
 }
-.profpic {
+
+.movie-card{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;  
+    align-items: center;
+    margin-top: 22px;
+}
+
+.movie-card-pic {
     border-radius: 50%;
-    border-color:rgb(255, 118, 33);
-    border-style: solid;
-    border-width: 4px;
-    max-width: 200px; 
-    min-width: 200px; 
-    max-height: 200px; 
-    min-height: 200px; 
+    max-width: 70px;
+    min-width: 70px;
+    max-height: 70px;
+    min-height: 70px;
     object-fit: cover;
-    transition: 0.7s;
-    position: relative; 
-    z-index: 1; 
 }
 
-.banner .profile-pic {
-    position: absolute;
-    bottom: -150px; /* Cambiado de -50px a -75px */
-    left: 20px;
-    margin: 100px;
+.movie-card-name {
+    margin: 20px;
+    font-weight: bolder;
+    font-size: 25px;
 }
-

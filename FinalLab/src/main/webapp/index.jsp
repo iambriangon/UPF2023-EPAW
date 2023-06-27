@@ -31,17 +31,7 @@
                 });
 
 
-                //Add tweet
-                $(document).on("click","#addTweetTag", function(event){
-                    $.post( "AddTweet", { content: $("#tweetContentTag").val()}, function(event) {
-                        $("#feed-container").load("GetProfile");
-                    });
-                    event.preventDefault();
-                });
-
-
-
-                // Update Username
+                // Delete Tweet
 
             });
         </script>

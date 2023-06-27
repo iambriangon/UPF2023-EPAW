@@ -3,7 +3,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         // Renderizar Tweets
-        $('#userTweetsTag').load('GetUserTweets');
+        $('#otherUserTweetsTag').load('GetOtherUserTweets', {id: ${otherUserId}});
     });
 </script>
 
@@ -14,19 +14,12 @@
         <img src="./imgs/content/avatar-2.jpeg" alt="Foto de portada del usuario" class="cover-photo">
         <img class="profile-pic" src="./imgs/content/avatar-2.jpeg" alt="Foto en círculo">
         <div class="profile-info">
-            <h6 class="profile-username">@${user.name}</h6>
+            <h6 class="profile-username">@${otherUserName}</h6>
         </div>
     </div>
 </div>
 
-
-<div class="tweet-section">
-    <p class="white-text">Share your thoughts about the last movie you saw:</p>
-    <textarea id="tweetContentTag" class="form-control" aria-label="With textarea"></textarea>
-    <input id="addTweetTag" class="BlackButton" type="submit" name="submit" value="Publish Tweet">
-</div>
-
 <div class="tweets-section">
-    <p class="SubTitle">Mis Tweets</p>
-    <div id="userTweetsTag"></div>
+    <p class="SubTitle">Tweets</p>
+    <div id="otherUserTweetsTag"></div>
 </div>

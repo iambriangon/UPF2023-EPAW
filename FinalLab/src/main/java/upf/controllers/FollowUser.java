@@ -1,8 +1,7 @@
 package upf.controllers;
 
 import org.apache.commons.beanutils.BeanUtils;
-import upf.managers.ManageTweets;
-import upf.models.Tweet;
+import upf.managers.ManageUsers;
 import upf.models.User;
 
 import javax.servlet.*;
@@ -10,33 +9,26 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Timestamp;
 
-@WebServlet(name = "AddTweet", value = "/AddTweet")
-public class AddTweet extends HttpServlet {
+@WebServlet(name = "FollowUser", value = "/FollowUser")
+public class FollowUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Tweet tweet = new Tweet();
-        ManageTweets tweetManager = new ManageTweets();
+
+        User fuser = new User();
+        ManageUsers userManager = new ManageUsers();
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
 
         try {
 
             if (session != null || user != null) {
-                BeanUtils.populate(tweet, request.getParameterMap());
-                tweet.setUid(user.getId());
-                tweet.setUname(user.getName());
-                tweet.setPostDateTime(new Timestamp(System.currentTimeMillis()));
-                String content = tweet.getContent();
-                String movie = content.split("#")[1].split(" ")[0];
-                tweet.setMovie(movie);
-                tweetManager.addTweet(tweet);
-                tweetManager.finalize();
+                BeanUtils.populate(fuser, request.getParameterMap());
+                userManager.followUser(user.getId(), fuser.getId());
+                userManager.finalize();
             }
 
         } catch (IllegalAccessException | InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

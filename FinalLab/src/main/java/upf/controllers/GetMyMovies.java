@@ -1,34 +1,33 @@
 package upf.controllers;
-
 import upf.managers.ManageTweets;
-import upf.models.Tweet;
 import upf.models.User;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
-@WebServlet(name = "GetUserTweets", value = "/GetUserTweets")
-public class GetUserTweets extends HttpServlet {
+@WebServlet(name = "GetMyMovies", value = "/GetMyMovies")
+public class GetMyMovies extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println("Getting Popular Movies: ");
+        List<String> movies = Collections.emptyList();
+        ManageTweets tweetManager = new ManageTweets();
+
         HttpSession session = request.getSession(false);
-        List<Tweet> tweets = Collections.emptyList();
         User user = (User) session.getAttribute("user");
+        movies = tweetManager.getMyMovies(user.getId(), 20);
 
-        if (session != null || user != null) {
-            ManageTweets tweetManager = new ManageTweets();
-            tweets = tweetManager.getUserTweets(user.getId(),0,4);
-            tweetManager.finalize();
-        }
-
-        request.setAttribute("tweets", tweets);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMyTweetFeed.jsp");
-        dispatcher.forward(request,response);
+        request.setAttribute("movies", movies);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMyMovies.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override

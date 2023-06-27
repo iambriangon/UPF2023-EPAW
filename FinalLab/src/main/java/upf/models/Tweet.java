@@ -10,6 +10,7 @@ public class Tweet implements java.io.Serializable {
 	 private String uname;
 	 private Timestamp postDateTime;
 	 private String content;
+	 private String movie;
 
 	 public Tweet() {
 	 }
@@ -50,6 +51,12 @@ public class Tweet implements java.io.Serializable {
 	 }
 	 public void setContent(String content) {
 		 this.content = content;
+	 }
+	 public String getMovie() {
+		 return this.movie;
+	 }
+	 public void setMovie(String movie) {
+		 this.movie = movie;
 	 }
 
 }

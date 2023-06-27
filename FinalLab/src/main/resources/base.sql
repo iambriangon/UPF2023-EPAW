@@ -1,3 +1,4 @@
+DROP database if exists finallab;
 CREATE database if not exists finallab ;
 
 USE finallab;
@@ -35,6 +36,7 @@ CREATE TABLE `tweets` (
                           `postdatetime` timestamp NULL DEFAULT NULL,
                           `content` varchar(100) DEFAULT NULL,
                           `pid` int DEFAULT NULL,
+                          `movie` varchar(100) DEFAULT NULL,
                           PRIMARY KEY (`id`),
                           KEY `tweets_users_fk` (`uid`),
                           KEY `tweets_tweets_fk` (`pid`),
@@ -44,3 +46,17 @@ CREATE TABLE `tweets` (
 
 
 
+INSERT INTO users (name,mail,pwd,birthday,gender,phoneNumber,terms,newsletter)
+VALUES
+    ("julius","julius@gmail.com","Julius1234","2000-01-01","male","654321987",TRUE,TRUE),
+    ("admin","admin@twitflix.com","admin","2000-01-01","male",null,TRUE,TRUE),
+    ("test","test@twitflix.com","test","2000-01-01","male",null,TRUE,TRUE),
+    ("mary","mary@hotmail.com","Mary1234","2000-01-01","female","654321988",TRUE,TRUE),
+    ("john_pork","johnpork@hotmail.com","John1234","2000-01-01","male","654321989",TRUE,TRUE);
+
+INSERT INTO tweets (uid,postdatetime,content,movie)
+VALUES
+    (1, "2023-05-20 11:45:09", "I love this new movie!!!! #Avatar2", "Avatar2"),
+    (1, "2023-06-20 16:23:29", "Best show I've ever seen #Succession", "Succession"),
+    (2, "2023-06-22 21:15:08", "I love this new movie!!!!", "Avatar2"),
+    (2, "2023-06-22 21:15:08", "I love this new movie!!!!", "Avatar2");

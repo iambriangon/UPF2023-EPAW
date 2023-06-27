@@ -21,46 +21,22 @@ public class GetTweetFeed extends HttpServlet {
         HttpSession session = request.getSession(false);
         System.out.println("Getting Tweet Feed: ");
 
-        List<Tweet> tweets2 = Collections.emptyList();
-        //User user = (User) session.getAttribute("user");
-
         List<Tweet> tweets = new ArrayList<>();
+        User user = (User) session.getAttribute("user");
+        ManageTweets tweetManager = new ManageTweets();
 
-        Tweet t1 = new Tweet();
-        t1.setContent("My Favorite Movie is Creed 3");
-        t1.setUname("Juanito");
-        t1.setPostDateTime(new Timestamp(System.currentTimeMillis()));
 
-        Tweet t2 = new Tweet();
-        t2.setContent("My Favorite Movie is Creed 1");
-        t2.setUname("Julius");
-        t2.setPostDateTime(new Timestamp(System.currentTimeMillis()));
-
-        Tweet t3 = new Tweet();
-        t3.setContent("My Favorite Movie is Pokemon 1");
-        t3.setUname("Julius");
-        t3.setPostDateTime(new Timestamp(System.currentTimeMillis()));
-
-        Tweet t4 = new Tweet();
-        t4.setContent("My Favorite Movie is Mario Bros");
-        t4.setUname("Jordi");
-        t4.setPostDateTime(new Timestamp(System.currentTimeMillis()));
-
-        if (session==null || session.getAttribute("user")==null) {
+        if (session.getAttribute("user") == null) {
             // If user anon get last published tweets
-            ManageTweets tweetManager = new ManageTweets();
-            tweets2 = tweetManager.getAllUserTweets(5);
-            tweetManager.finalize();
-            request.setAttribute("tweets", tweets2);
+            System.out.println("!!!TweetFeed Anon User!!!!!");
+            tweets = tweetManager.getAllUserTweets(5);
         }
         else {
             // If user logged in get tweets of followers
-            System.out.print("User Registered");
-
-            tweets.add(t2);
-            tweets.add(t3);
-            request.setAttribute("tweets", tweets);
+            tweets = tweetManager.getUserFollowedTweets(user.getId(),0,4);
         }
+        tweetManager.finalize();
+        request.setAttribute("tweets", tweets);
 
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("ViewTweetFeed.jsp");

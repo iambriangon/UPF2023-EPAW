@@ -9,9 +9,47 @@
         // Load by default Feed Home
         $('#feed-container').load('GetFeedHome');
 
-        // Left bar navvigation pages
+        // Left bar navigation pages
         $(document).on("click",".left-nav",function(event) {
             $('#feed-container').load($(this).attr('id'));
+            event.preventDefault();
+        });
+
+        // Follow User
+        $(document).on('click', '#followUserTag', function (event) {
+            $.post("FollowUser", {id: $(this).parent().attr('id')}, function (event) {
+                $('#feed-container').load('GetExplore');
+            });
+            event.preventDefault();
+        });
+
+        // Unfollow User
+        $(document).on('click', '#unfollowUserTag', function (event) {
+            $.post("UnfollowUser", {id: $(this).parent().attr('id')}, function (event) {
+                $('#feed-container').load('GetExplore');
+            });
+            event.preventDefault();
+        });
+
+        // Delete Tweet
+        $(document).on('click', '#deleteTweetTag', function (event) {
+            $.post("DelTweet", {id: $(this).parent().attr('id')}, function (event) {
+                $('#feed-container').load('GetProfile');
+            });
+            event.preventDefault();
+        });
+
+        //Add tweet
+        $(document).on("click","#addTweetTag", function(event){
+            $.post( "AddTweet", { content: $("#tweetContentTag").val()}, function(event) {
+                $("#feed-container").load("GetProfile");
+            });
+            event.preventDefault();
+        });
+
+        // Enter Profile Other User
+        $(document).on("click", "#enterProfileTag", function (event) {
+            $("#feed-container").load("GetProfileOtherUsers", {id: $(this).parent().attr('id')});
             event.preventDefault();
         });
 
@@ -59,7 +97,7 @@
                     <div class="Home left-nav" id="GetFeedHome" onclick="changeFontWeight(this)">Home</div>
                     <div class="Profile left-nav" id="GetProfile" onclick="changeFontWeight(this)">Profile</div>
                     <div class="Explore left-nav" id="GetExplore" onclick="changeFontWeight(this)">Explore</div>
-                    <div class="MyMovies" onclick="changeFontWeight(this)">MyMovies</div>
+                    <div class="MyMovies left-nav" id="GetMyMovies" onclick="changeFontWeight(this)">MyMovies</div>
                     <div class="Settings left-nav" id="GetSettings" onclick="changeFontWeight(this)">Settings</div>
                     <div class="LogOut nav-tag" id="LogoutController" onclick="changeFontWeight(this)">Log Out</div>
                 </div>

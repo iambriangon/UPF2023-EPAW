@@ -1,5 +1,6 @@
 package upf.controllers;
 
+import org.apache.commons.beanutils.BeanUtils;
 import upf.managers.ManageTweets;
 import upf.models.Tweet;
 import upf.models.User;
@@ -8,27 +9,27 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 
-@WebServlet(name = "GetUserTweets", value = "/GetUserTweets")
-public class GetUserTweets extends HttpServlet {
+@WebServlet(name = "DelTweet", value = "/DelTweet")
+public class DelTweet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Tweet tweet = new Tweet();
+        ManageTweets tweetManager = new ManageTweets();
         HttpSession session = request.getSession(false);
-        List<Tweet> tweets = Collections.emptyList();
         User user = (User) session.getAttribute("user");
 
-        if (session != null || user != null) {
-            ManageTweets tweetManager = new ManageTweets();
-            tweets = tweetManager.getUserTweets(user.getId(),0,4);
-            tweetManager.finalize();
+        try {
+            if (session != null || user != null) {
+                BeanUtils.populate(tweet, request.getParameterMap());
+                tweetManager.deleteTweet(tweet.getId(),user.getId());
+                tweetManager.finalize();
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
         }
-
-        request.setAttribute("tweets", tweets);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMyTweetFeed.jsp");
-        dispatcher.forward(request,response);
     }
 
     @Override

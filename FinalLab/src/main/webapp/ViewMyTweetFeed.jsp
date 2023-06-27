@@ -6,11 +6,12 @@
     <c:forEach var="t" items="${tweets}">
         <article>
             <div class="tweet-header">
-                <div id="${t.uid}" class="tweet-user-div">
-                    <img id="enterProfileTag" class="tweet-profile-pic" src="./imgs/content/avatar-2.jpeg">
+                <div class="tweet-user-div">
+                    <img class="tweet-profile-pic" src="./imgs/content/avatar-2.jpeg">
                     <p class="tweet-username">${t.uname}</p>
                 </div>
-                <div class="tweet-bubble-div">
+                <div id="${t.id}" class="tweet-bubble-div">
+                    <btn id="deleteTweetTag" class="delete-tweet">Delete</btn>
                     <img class="mini-bubble" src="./imgs/content/avatar-2.jpeg" alt="Avatar 2">
                 </div>
             </div>

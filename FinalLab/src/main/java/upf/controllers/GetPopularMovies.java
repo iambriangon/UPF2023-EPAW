@@ -1,4 +1,6 @@
 package upf.controllers;
+import upf.managers.ManageTweets;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,13 +17,9 @@ public class GetPopularMovies extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println("Getting Popular Movies: ");
-        List<String> movies = new ArrayList<>();
-        movies.add("Avatar");
-        movies.add("Harry Potter");
-        movies.add("Pokemon");
-        movies.add("Avatar2");
-        movies.add("Harry Potter2");
-        movies.add("Pokemon2");
+        List<String> movies = Collections.emptyList();
+        ManageTweets tweetManager = new ManageTweets();
+        movies = tweetManager.getPopularMovies(5);
 
         request.setAttribute("movies", movies);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ViewPopularMovies.jsp");
