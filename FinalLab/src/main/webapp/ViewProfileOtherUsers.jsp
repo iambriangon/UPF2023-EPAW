@@ -11,7 +11,7 @@
 
 <div class="banner-container">
     <div class="banner">
-        <img src="./imgs/content/avatar-2.jpg" alt="Foto de portada del usuario" class="cover-photo">
+        <img src="./imgs/content/Avatar2.jpg" alt="Foto de portada del usuario" class="cover-photo">
         <img class="profile-pic" src="./imgs/content/profile-pic-default.jpg" alt="Foto en círculo">
         <div class="profile-info">
             <h6 class="profile-username">@${otherUserName}</h6>
